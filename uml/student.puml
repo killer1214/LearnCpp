@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+'skinparam backgroundColor $BGCOLOR
+skinparam backgroundColor #Moccasin
+skinparam useBetaStyle false
+!option handwritten true
+skinparam shadowing false
+
+class Student {
+ - studentId: string
+ - name: string
+ - email: string
+ + registerCourse(course: Course) : boolean
+ + dropCourse(course: Course): boolean
+ + getEnrolledCourse(): List<Course>
+}
+
+
+class Course {
+ - courseId: string
+ - courseName: string
+ - credits: int
+ - maxStudents: int
+ + addStudent(student: Student): boolean
+ + removeStudent(student: Student): boolean
+ + isFull(): boolean
+}
+
+class Teacher {
+ - teacherId: string
+ - name: string
+ - department: string
+ + assignCourse(course: Course): void
+ + removeCourse(course: Course): void
+}
+
+class Enrollment {
+ - enrollmentId: string
+ - enrollmentDate: Date
+ - grade: string
+ + assignGrade(grade: string): void
+ + getGrade(): string
+}
+
+Student "1" --> "0..*" Enrollment
+Course "1" --> "0..*" Enrollment
+Teacher "1" --> "1..*" Course
+
+class Person {
+ # name: string
+ # email: string
+ + getName(): string
+ + getEmail(): string
+}
+
+Student --|> Person
+Teacher --|> Person
+
+@enduml

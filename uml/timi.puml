@@ -1,0 +1,26 @@
+@startuml
+' 订单处理活动图
+
+start
+:发起timi邀请;
+
+if (答复) then (上号)
+  :组队;
+  :开启游戏;
+
+  if (游戏结果) then (胜利)
+    :再打一把;
+  else (失败)
+    :睡觉;
+    stop
+  endif
+
+
+else (no)
+  :睡觉;
+endif
+
+:完成timi邀请;
+stop
+
+@enduml
